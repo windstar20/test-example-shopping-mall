@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './text.css';
 
 /**
+ * 무엇을 테스트 할 것인가?
  * placeholder 설정 - 테스트 작성 완료
  * className에 따른 css class 설정 - 테스트 작성 완료
  * 텍스트를 입력할 때마다 onChange 핸들러 호출
