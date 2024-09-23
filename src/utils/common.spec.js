@@ -37,16 +37,23 @@ describe('pick util 단위테스트', () => {
 });
 
 describe('debounce', () => {
-  // 타이머 모킹 -> 0.3초 흐른것으로 타이머 조작 -> spy 함수 호출 확인
   beforeEach(() => {
+    //* 타이머 모킹 -> 0.3초 흐른것으로 타이머 조작 -> spy 함수 호출 확인
     // teardown 에서 특정 모듈에 대해 모킹한 경우, 테스트 종료 후에 teardown 에서 모킹 초기화를 해야한다.
     vi.useFakeTimers();
+
+    //* 테스트가 실행되는 현재 시간을 정의하는 API.
+    // useFakeTimters API 호출한 뒤, setSystemTime에 원하는 날짜를 나타내는 객체 또는 값을 넣어 현재 시간을 정의할 수 있다.
+    // 테스트 당시의 시간에 의존하는 테스트의 경우, 시간을 고정하지 않으면 테스트가 깨질 수 있다.
+    // => 그래서 setSystemTime 으로 시간을 고정하면 일관된 환경에서 테스트가 가능하다.
+
+    vi.setSystemTime(new Date('2024-09-23'));
   });
 
-
   afterEach(() => {
+    //* 타이머 모킹 초기화
     vi.useRealTimers();
-  })
+  });
 
   it('특정 시간이 지난 후 함수가 호출된다.', () => {
     const spy = vi.fn();
