@@ -8,7 +8,14 @@ import {
 } from '@/utils/test/mockZustandStore';
 import render from '@/utils/test/render';
 
-it('장바구니에 포함된 아이템들의 이름, 수량, 합계가 제대로 노출된다', async () => {});
+beforeEach(() => {
+  mockUseUserStore({ user: { id: 10 } });
+
+})
+
+it('장바구니에 포함된 아이템들의 이름, 수량, 합계가 제대로 노출된다', async () => {
+
+});
 
 it('특정 아이템의 수량이 변경되었을 때 값이 재계산되어 올바르게 업데이트 된다', async () => {});
 

@@ -30,5 +30,4 @@ const ProductInfoTable = () => {
     </TableContainer>
   );
 };
-
 export default ProductInfoTable;
