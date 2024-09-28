@@ -63,8 +63,48 @@ it('장바구니에 포함된 아이템들의 이름, 수량, 합계가 제대�
   expect(within(secondItem).getByText('$1,768.00')).toBeInTheDocument();
 });
 
-it('특정 아이템의 수량이 변경되었을 때 값이 재계산되어 올바르게 업데이트 된다', async () => {});
+it('특정 아이템의 수량이 변경되었을 때 값이 재계산되어 올바르게 업데이트 된다', async () => {
+  // 컴포넌트 렌더링
+  const { user } = render(<ProductInfoTable />);
+  //모든 상품 로우 요소 조회 => 첫 번째, 두번째 아이템
+  const [firstItem] = screen.getAllByRole('row');
+  //'textbox' 역할을 가진 요소 조회
+  const input = within(firstItem).getByRole('textbox');
+  //수량 변경 시뮬레이션
 
-it('특정 아이템의 수량이 1000개로 변경될 경우 "최대 999개 까지 가능합니다!"라고 경고 문구가 노출된다', async () => {});
+  await user.clear(input);
+  await user.type(input, '5');
 
-it('특정 아이템의 삭제 버튼을 클릭할 경우 해당 아이템이 사라진다', async () => {});
+  // 2427 + 809 * 2 = 4045
+  expect(screen.getByText('$4,045.00')).toBeInTheDocument();
+});
+
+it('특정 아이템의 수량이 1000개로 변경될 경우 "최대 999개 까지 가능합니다!"라고 경고 문구가 노출된다', async () => {
+  //alert 함수를 대체할 spy 함수를 만든다.
+  const alertSpy = vi.fn();
+  //alert spy 를 호출하려면 window.alert 을 호출해야 한다.
+  // window.alert -> alertSpy 로 대체
+  vi.stubGlobal('alert', alertSpy);
+
+  const { user } = await render(<ProductInfoTable />);
+  const [firstItem] = screen.getAllByRole('row');
+  const input = within(firstItem).getByRole('textbox');
+  await user.clear('input');
+  await user.type(input, '1000');
+  expect(alertSpy).toHaveBeenNthCalledWith(1, '최대 999개 까지 가능합니다!');
+});
+
+it('특정 아이템의 삭제 버튼을 클릭할 경우 해당 아이템이 사라진다', async () => {
+  const { user } = await render(<ProductInfoTable />);
+
+  const [, secondItem] = user.getAllByRole('row');
+  const deleteButton = within(secondItem).getByRole('button');
+
+  //삭제 버튼을 클릭하기 전에 두 번째 아이템이 존재하는지 단언.
+  expect(screen.getByText('Awesome Concrete Shirt')).toBeInTheDocument();
+  await user.click(deleteButton);
+
+  //삭제되었는지 확인.
+  // queryBy~~ : 요소의 존재 유무 판단. getByText와 다르게 요소가 존재하지 않아도 에러를 던지지 않음.
+  expect(screen.queryByText('Awesome Concrete Shirt')).not.toBeInTheDocument();
+});
