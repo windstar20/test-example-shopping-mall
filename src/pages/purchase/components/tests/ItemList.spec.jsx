@@ -5,6 +5,8 @@ import ItemList from '@/pages/purchase/components/ItemList';
 import { mockUseCartStore } from '@/utils/test/mockZustandStore';
 import render from '@/utils/test/render';
 
+//아이템 리스트 컴포넌트는 장바구니 스토어에 있는 구매대상 물품만 보여주는 컴포넌트이므로,
+//단순하게 카트 store 만 모킹하여 정보가 제대로 렌더링 되는지 확인하면 된다.
 beforeEach(() => {
   mockUseCartStore({
     cart: {

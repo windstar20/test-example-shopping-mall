@@ -5,6 +5,9 @@ import { handlers } from '@/__mocks__/handlers';
 
 /* msw */
 //* msw의 setupServer 를 사용하여 리퀘스트 핸들러들을 설정하고 msw 서버를 구동할 준비.
+
+//초기에 구동을 위해 설정한 msw 서버 인스턴스와 동일한 인스턴스를 사용해야
+//기존에 모킹된 API의 응답을 변경할 수 있음
 export const server = setupServer(...handlers);
 
 //* msw 설정 적용
