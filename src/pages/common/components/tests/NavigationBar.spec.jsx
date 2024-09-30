@@ -23,10 +23,17 @@ vi.mock('react-router-dom', async () => {
   };
 });
 
-it('"Wish Mart" 텍스트 로고을 클릭할 경우 "/" 경로로 navigate가 호출된다.', async () => {});
+it('"Wish Mart" 텍스트 로고을 클릭할 경우 "/" 경로로 navigate가 호출된다.', async () => {
+  const { user } = await render(<NavigationBar />);
+  const wishMart = screen.getByText('Wish Mart');
+  await user.click(wishMart);
+  expect(navigateFn).toHaveBeenNthCalledWith(1, '/');
+});
 
 describe('로그인이 된 경우', () => {
-  beforeEach(() => {});
+  beforeEach(() => {
+    mockUseUserStore({ isLogin: true });
+  });
 
   it('장바구니(담긴 상품 수와 버튼)와 로그아웃 버튼(사용자 이름: "Maria")이 노출된다.', async () => {});
 
