@@ -18,7 +18,6 @@
     "@mui/lab": "5.0.0-alpha.124",
     "@mui/material": "^5.11.10",
     "@tanstack/react-query": "^4.29.23",
-    "@vitest/ui": "^2.1.1",
     "axios": "^1.4.0",
     "body-parser": "^1.20.2",
     "classnames": "^2.3.2",
@@ -36,10 +35,11 @@
     "react-hot-toast": "^2.4.0",
     "react-router-dom": "^6.8.1",
     "swiper": "^9.1.0",
-    "vitest": "^2.1.1",
     "zustand": "^4.3.5"
   },
   "devDependencies": {
+    "vitest": "^2.1.1",
+    "@vitest/ui": "^2.1.1",
     "@storybook/addon-actions": "^7.0.27",
     "@storybook/addon-essentials": "^7.0.27",
     "@storybook/addon-interactions": "^7.0.27",
