@@ -12,6 +12,7 @@ export const Default = { name: '기본' };
 export const WithValue = {
   name: '가격이 입력된 상태',
   play: async ({ canvasElement }) => {
+    // canvasElement : 스토리가 렌더링되는 루트 요소
     const canvas = within(canvasElement);
 
     const [min, max] = canvas.getAllByRole('textbox');

@@ -14,7 +14,7 @@
     "eslint": "eslint 'src/**/*.js' 'src/**/*.jsx'",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=토큰입력"
+    "chromatic": "npx chromatic --project-token=chpt_1b525f0ea7c651d"
   },
   "dependencies": {
     "@mui/icons-material": "^5.11.9",
